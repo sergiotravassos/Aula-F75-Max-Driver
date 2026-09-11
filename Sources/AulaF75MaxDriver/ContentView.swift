@@ -159,6 +159,7 @@ struct ContentView: View {
                     .pickerStyle(.segmented)
                     .labelsHidden()
                     .frame(width: 230)
+                    .id("fit-\(model.selectedLanguageCode)")
                 }
                 .foregroundStyle(.ink.opacity(0.88))
 
