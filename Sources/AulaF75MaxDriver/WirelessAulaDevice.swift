@@ -116,7 +116,23 @@ final class WirelessAulaDevice {
                 throw error
             }
         }
-        throw AulaError.endpointNotFound("2.4G raw 0xff60")
+
+        // The receiver only publishes its vendor collections while the keyboard
+        // is actually talking to it over 2.4G. Plugged in by cable it exposes
+        // nothing but the boot keyboard pages, so fall back to the wired command
+        // channel, which carries the same settings.
+        //
+        // It has to be 0xff13 specifically: applyWiredStandardRGB and
+        // sendRawCompatibleReport both go out as 64-byte feature reports, and
+        // the display channel 0xff68 has no feature reports at all.
+        if let wired = matchingWiredDevices().first(where: {
+            usagePage($0) == AulaConstants.wiredCommandUsagePage
+                && intProperty($0, kIOHIDMaxFeatureReportSizeKey) >= AulaConstants.commandLength
+        }) {
+            return try WirelessAulaDevice(rawDevice: wired, transport: .wiredControl)
+        }
+
+        throw AulaError.endpointNotFound("2.4G raw 0xff60 or wired command 0xff13")
     }
 
     static func scanEndpoints() -> [HIDEndpointInfo] {
@@ -145,6 +161,14 @@ final class WirelessAulaDevice {
     }
 
     func queryBattery() throws -> Int? {
+        // Battery level lives in the receiver, not in the keyboard's command
+        // channel, and this runs on a refresh timer. Refuse it on the wired
+        // fallback rather than firing unsolicited packets at the keyboard every
+        // cycle for an answer that will never come.
+        guard transport != .wiredControl else {
+            throw AulaError.endpointNotFound("2.4G receiver (battery needs the dongle)")
+        }
+
         let pipe = BatteryInputPipe(device: rawDevice)
         batteryPipe = pipe
         pipe.start()
@@ -337,6 +361,18 @@ final class WirelessAulaDevice {
         }
         guard result == kIOReturnSuccess else {
             throw AulaError.hidFailed(operation, Int32(result))
+        }
+
+        // Complete the exchange the way AulaDevice.commandExchange does. The
+        // wired command channel is request/response: every SET_REPORT that the
+        // clock sync and the display upload send is followed by a GET_REPORT
+        // that drains the reply. Writing without reading leaves the reply
+        // queued and the keyboard's state machine part-way through the
+        // transaction, so the writes that follow land nowhere.
+        var response = [UInt8](repeating: 0, count: 64)
+        var responseLength = response.count
+        _ = response.withUnsafeMutableBufferPointer { pointer in
+            IOHIDDeviceGetReport(rawDevice, kIOHIDReportTypeFeature, 0, pointer.baseAddress!, &responseLength)
         }
     }
 
