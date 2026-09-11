@@ -29,7 +29,12 @@ device="$(
     hdiutil attach "${DMG_RW_PATH}" -readwrite -noverify -noautoopen -owners off -mountpoint "$mount_dir" \
         | awk '/^\/dev\// { print $1; exit }'
 )"
-osascript "${DMG_STYLE_SCRIPT}" "$mount_dir" "${APP_NAME}"
+# DMG window styling is cosmetic: never fail the build when Finder
+# automation is unavailable (headless session, CI, or Automation
+# permission not granted).
+if ! osascript "${DMG_STYLE_SCRIPT}" "$mount_dir" "${APP_NAME}"; then
+    printf 'warning: skipped DMG window styling; Finder automation is unavailable.\n' >&2
+fi
 sync
 hdiutil detach "$device"
 device=""
