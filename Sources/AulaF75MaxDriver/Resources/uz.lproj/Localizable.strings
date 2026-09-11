@@ -185,3 +185,9 @@
 "Direction %d" = "%d-yo'nalish";
 "Level %d" = "%d-daraja";
 "Value %d" = "%d-qiymat";
+
+"Appearance" = "Ko‘rinish";
+"Follow macOS or pin the window to one appearance." = "macOS’ga ergashing yoki oynani bitta ko‘rinishga biriktiring.";
+"Match system" = "Tizimga mos";
+"Light" = "Yorug‘";
+"Dark" = "Qorong‘i";

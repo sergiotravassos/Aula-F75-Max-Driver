@@ -185,3 +185,9 @@
 "Direction %d" = "%d-бағыт";
 "Level %d" = "%d-деңгей";
 "Value %d" = "%d-мән";
+
+"Appearance" = "Безендіру";
+"Follow macOS or pin the window to one appearance." = "macOS-пен үйлесу немесе терезені бір көрініске бекіту.";
+"Match system" = "Жүйемен үйлесу";
+"Light" = "Ашық";
+"Dark" = "Қою";

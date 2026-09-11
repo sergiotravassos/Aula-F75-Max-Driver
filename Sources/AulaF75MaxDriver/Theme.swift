@@ -93,3 +93,41 @@ extension ShapeStyle where Self == Color {
     static var ok: Color { Color.ok }
     static var warn: Color { Color.warn }
 }
+
+/// What the user asked the window to look like, as opposed to what the system
+/// is currently set to. `.system` is the default and leaves the decision to
+/// macOS; the other two override it for this app alone.
+enum AppTheme: String, CaseIterable, Identifiable {
+    case system
+    case light
+    case dark
+
+    var id: String { rawValue }
+
+    var titleKey: String {
+        switch self {
+        case .system: return "Match system"
+        case .light: return "Light"
+        case .dark: return "Dark"
+        }
+    }
+
+    var title: String { L10n.text(titleKey) }
+
+    var symbol: String {
+        switch self {
+        case .system: return "circle.lefthalf.filled"
+        case .light: return "sun.max"
+        case .dark: return "moon"
+        }
+    }
+
+    /// `nil` means "inherit", which is how AppKit spells following the system.
+    var nsAppearance: NSAppearance? {
+        switch self {
+        case .system: return nil
+        case .light: return NSAppearance(named: .aqua)
+        case .dark: return NSAppearance(named: .darkAqua)
+        }
+    }
+}

@@ -185,3 +185,9 @@
 "Direction %d" = "方向 %d";
 "Level %d" = "等级 %d";
 "Value %d" = "值 %d";
+
+"Appearance" = "外观";
+"Follow macOS or pin the window to one appearance." = "跟随 macOS，或将窗口固定为一种外观。";
+"Match system" = "跟随系统";
+"Light" = "浅色";
+"Dark" = "深色";

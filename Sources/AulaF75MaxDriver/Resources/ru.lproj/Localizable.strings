@@ -185,3 +185,9 @@
 "Direction %d" = "Направление %d";
 "Level %d" = "Уровень %d";
 "Value %d" = "Значение %d";
+
+"Appearance" = "Оформление";
+"Follow macOS or pin the window to one appearance." = "Следовать за macOS или закрепить одно оформление.";
+"Match system" = "Как в системе";
+"Light" = "Светлое";
+"Dark" = "Тёмное";

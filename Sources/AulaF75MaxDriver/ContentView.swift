@@ -408,6 +408,15 @@ struct ContentView: View {
                 SectionDivider()
                     .zIndex(0)
 
+                ThemeSelector(
+                    selected: model.selectedTheme,
+                    selectTheme: model.setTheme
+                )
+                .zIndex(0)
+
+                SectionDivider()
+                    .zIndex(0)
+
                 HStack(alignment: .center, spacing: 12) {
                     Image(systemName: "power")
                         .font(.title3)
@@ -862,6 +871,54 @@ private struct LanguageSelector: View {
                 .stroke(.ink.opacity(0.12), lineWidth: 1)
         )
         .shadow(color: .well.opacity(0.35), radius: 18, y: 10)
+    }
+}
+
+private struct ThemeSelector: View {
+    let selected: AppTheme
+    let selectTheme: (AppTheme) -> Void
+
+    var body: some View {
+        HStack(alignment: .center, spacing: 12) {
+            Image(systemName: selected.symbol)
+                .font(.title3)
+                .foregroundStyle(.brand)
+                .frame(width: 28)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(L10n.text("Appearance"))
+                    .font(.headline)
+                    .foregroundStyle(.ink)
+                Text(L10n.text("Follow macOS or pin the window to one appearance."))
+                    .font(.caption)
+                    .foregroundStyle(.ink.opacity(0.55))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: 8)
+
+            HStack(spacing: 4) {
+                ForEach(AppTheme.allCases) { theme in
+                    Button {
+                        selectTheme(theme)
+                    } label: {
+                        Image(systemName: theme.symbol)
+                            .font(.callout.weight(.semibold))
+                            .foregroundStyle(theme == selected ? .brand : .ink.opacity(0.5))
+                            .frame(width: 30, height: 24)
+                            .background(
+                                theme == selected ? .brand.opacity(0.14) : .ink.opacity(0.05),
+                                in: RoundedRectangle(cornerRadius: 7)
+                            )
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .help(theme.title)
+                    .accessibilityLabel(theme.title)
+                }
+            }
+            .id("theme-\(selected.rawValue)")
+        }
     }
 }
 

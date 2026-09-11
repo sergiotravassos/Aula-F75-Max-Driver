@@ -45,6 +45,7 @@ final class AppViewModel: ObservableObject {
     @Published var gameModeEnabled = false
     @Published var launchAtLoginEnabled = LaunchAtLogin.isEnabled
     @Published var selectedLanguageCode: String
+    @Published var selectedTheme: AppTheme
 
     private let batteryRefreshIntervalNanoseconds: UInt64 = 300_000_000_000
     private let batteryNotificationService = BatteryNotificationService.shared
@@ -74,6 +75,9 @@ final class AppViewModel: ObservableObject {
     init() {
         let storedCode = UserDefaults.standard.string(forKey: "app.language.code") ?? "system"
         selectedLanguageCode = L10n.configure(languageCode: storedCode)
+
+        let storedTheme = UserDefaults.standard.string(forKey: Self.themeDefaultsKey)
+        selectedTheme = AppTheme(rawValue: storedTheme ?? "") ?? .system
     }
 
     var isWiredDevicePresent: Bool {
@@ -133,6 +137,14 @@ final class AppViewModel: ObservableObject {
         deviceMonitor?.stop()
         deviceMonitor = nil
         stopBatteryRefreshTimer()
+    }
+
+    static let themeDefaultsKey = "app.theme"
+
+    func setTheme(_ theme: AppTheme) {
+        guard selectedTheme != theme else { return }
+        selectedTheme = theme
+        UserDefaults.standard.set(theme.rawValue, forKey: Self.themeDefaultsKey)
     }
 
     func setLanguage(_ languageCode: String) {

@@ -185,3 +185,9 @@
 "Direction %d" = "Dirección %d";
 "Level %d" = "Nivel %d";
 "Value %d" = "Valor %d";
+
+"Appearance" = "Apariencia";
+"Follow macOS or pin the window to one appearance." = "Sigue a macOS o fija la ventana en una apariencia.";
+"Match system" = "Seguir al sistema";
+"Light" = "Claro";
+"Dark" = "Oscuro";
