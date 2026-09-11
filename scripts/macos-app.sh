@@ -11,6 +11,13 @@ cp "${EXECUTABLE}" "${APP_DIR}/Contents/MacOS/${APP_NAME}"
 cp Info.plist "${APP_DIR}/Contents/Info.plist"
 cp "Sources/AulaF75MaxDriver/Resources/AppIcon.icns" "${APP_DIR}/Contents/Resources/AppIcon.icns"
 
+# Copy the SwiftPM resource bundle (localizations) into the app bundle.
+# Without it Bundle.module hits fatalError and the app crashes on the first
+# L10n.text() call, before the main window is drawn.
+for b in "$(dirname "${EXECUTABLE}")"/*.bundle; do
+    [ -e "$b" ] && cp -R "$b" "${APP_DIR}/Contents/Resources/"
+done
+
 # Clear any inherited quarantine metadata and re-sign the final app bundle.
 # This keeps Gatekeeper from treating the copied bundle as a damaged executable.
 if command -v xattr >/dev/null 2>&1; then
