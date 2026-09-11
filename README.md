@@ -23,7 +23,12 @@ After pushing to `main` or `master`, GitHub Actions publishes the `docs/` direct
 
 ## Screenshots
 
-![Aula F75 Max Driver main window](docs/screenshots/main-window.png)
+The window follows the macOS appearance, and the Appearance control in App Settings can
+pin it to one regardless of the system setting.
+
+| Light | Dark |
+| --- | --- |
+| ![Aula F75 Max Driver in the light appearance](docs/screenshots/main-window-light.png) | ![Aula F75 Max Driver in the dark appearance](docs/screenshots/main-window-dark.png) |
 
 ![Aula F75 Max Driver endpoint diagnostics and app settings](docs/screenshots/details-window.png)
 
@@ -42,6 +47,7 @@ After pushing to `main` or `master`, GitHub Actions publishes the `docs/` direct
 - Provides a factory reset flow for display slots and keyboard configuration blocks used by this implementation.
 - Provides a diagnostic endpoint view for HID transport troubleshooting.
 - Supports app language selection with bundled localizations.
+- Follows the macOS light or dark appearance, with an Appearance control to pin either one.
 - Ships native macOS, Linux, and Android builds with platform-specific integrations.
 - Supports Launch at Login on macOS.
 
@@ -267,6 +273,17 @@ The app polls battery periodically while the receiver is present. Manual battery
 
 Launch at Login is managed through the macOS ServiceManagement framework. It can be toggled from the app settings panel.
 
+### Appearance
+
+The window follows the system appearance by default: content, panels and the backdrop
+gradient are all dynamic colours, so switching macOS between light and dark redraws the
+app without a restart.
+
+App Settings also offers an Appearance control with three states -- match system, light,
+dark. Choosing light or dark pins the app to that appearance whatever the system is set
+to. The choice is stored in `UserDefaults` under `app.theme` and applies to the window
+and to the app's menus and panels.
+
 ### Android Notes
 
 - The Android build is a separate Gradle project under `android/`.
@@ -375,7 +392,7 @@ Bundled localizations currently include:
 - Portuguese
 - Simplified Chinese
 
-The macOS and Linux apps bundle all seven localizations. Their selected language is stored in `UserDefaults` under `app.language.code`, and the `system` option uses the default bundle resolution. Android currently bundles English and Russian and stores its language choice in Android shared preferences.
+The macOS and Linux apps bundle all seven localizations. Their selected language is stored in `UserDefaults` under `app.language.code`, and the `system` option uses the default bundle resolution. On macOS the appearance choice sits alongside it under `app.theme`. Android currently bundles English and Russian and stores its language choice in Android shared preferences.
 
 ## Testing
 
