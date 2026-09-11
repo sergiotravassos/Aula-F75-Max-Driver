@@ -23,6 +23,7 @@
 "Screen upload" = "Screen upload";
 "Prepare a PNG, JPEG, GIF, BMP, TIFF or WebP for the 128 x 128 keyboard display." = "Prepare a PNG, JPEG, GIF, BMP, TIFF or WebP for the 128 x 128 keyboard display.";
 "Choose File" = "Choose File";
+"No file selected" = "No file selected";
 "Upload progress" = "Upload progress";
 "Upload to Keyboard Screen" = "Upload to Keyboard Screen";
 "Factory reset" = "Factory reset";
@@ -82,6 +83,11 @@
 "Cancel" = "Cancel";
 "Factory reset cancelled." = "Factory reset cancelled.";
 "Starting factory reset..." = "Starting factory reset...";
+"Clearing display memory" = "Clearing display memory";
+"Resetting keymap and macro data" = "Resetting keymap and macro data";
+"Resetting lighting data" = "Resetting lighting data";
+"Sending reset footer" = "Sending reset footer";
+"Resetting display config" = "Resetting display config";
 "Factory reset complete." = "Factory reset complete.";
 "Applying RGB lighting..." = "Applying RGB lighting...";
 "RGB set: %@ B%d S%d %@ %@." = "RGB set: %@ B%d S%d %@ %@.";
@@ -104,6 +110,7 @@
 "wired %d endpoint(s)" = "wired %d endpoint(s)";
 "2.4G disconnected" = "2.4G disconnected";
 "2.4G %d endpoint(s)" = "2.4G %d endpoint(s)";
+"%d endpoint(s)" = "%d endpoint(s)";
 "Connect the 2.4G dongle before querying battery." = "Connect the 2.4G dongle before querying battery.";
 "Querying keyboard battery..." = "Querying keyboard battery...";
 "Battery: %d%%." = "Battery: %d%%.";

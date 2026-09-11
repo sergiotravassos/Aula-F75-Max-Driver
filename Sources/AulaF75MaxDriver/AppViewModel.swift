@@ -97,15 +97,15 @@ final class AppViewModel: ObservableObject {
 
     var batteryStatusColor: Color {
         guard let percent = batteryPercent else {
-            return isDonglePresent ? .orange : .white.opacity(0.42)
+            return isDonglePresent ? .brand : .ink.opacity(0.42)
         }
         if percent <= 20 {
-            return .red
+            return .warn
         }
         if percent <= 50 {
-            return .orange
+            return .brand
         }
-        return .green
+        return .ok
     }
 
     var isWiredControlPresent: Bool {
@@ -113,7 +113,7 @@ final class AppViewModel: ObservableObject {
     }
 
     var selectedFileName: String {
-        selectedFile?.lastPathComponent ?? "No file selected"
+        selectedFile?.lastPathComponent ?? L10n.text("No file selected")
     }
 
     func startMonitoring() {
@@ -248,7 +248,7 @@ final class AppViewModel: ObservableObject {
                 colorful: colorful,
                 color: color
             )
-            let colorText = colorful ? L10n.text("Colorful") : String(format: "#%06X", color)
+            let colorText = colorful ? L10n.text("Colourful") : String(format: "#%06X", color)
             return L10n.format(
                 "RGB set: %@ B%d S%d %@ %@.",
                 WirelessAulaLabels.rgbModeTitle(mode),

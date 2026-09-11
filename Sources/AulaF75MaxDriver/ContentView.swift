@@ -36,11 +36,11 @@ struct ContentView: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text(L10n.text("Aula F75 Max Driver"))
                     .font(.custom("Avenir Next Condensed", size: 46).weight(.heavy))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.ink)
 
                 Text(L10n.text("One focused control surface for USB screen tasks and 2.4G keyboard settings."))
                     .font(.custom("Avenir Next", size: 15))
-                    .foregroundStyle(.white.opacity(0.68))
+                    .foregroundStyle(.ink.opacity(0.68))
             }
 
             Spacer()
@@ -48,7 +48,7 @@ struct ContentView: View {
             StatusPill(
                 title: model.isWorking ? "Working" : "Ready",
                 systemImage: model.isWorking ? "hourglass" : "checkmark.circle.fill",
-                color: model.isWorking ? .orange : .green
+                color: model.isWorking ? .brand : .ok
             )
         }
     }
@@ -60,7 +60,7 @@ struct ContentView: View {
                 value: model.isWiredDevicePresent ? L10n.format("%d endpoint(s)", model.endpoints.count) : L10n.text("Not connected"),
                 detail: model.isWiredDevicePresent ? L10n.text("Required for clock sync and display upload.") : L10n.text("Connect the keyboard by USB-C."),
                 systemImage: "cable.connector",
-                color: model.isWiredDevicePresent ? .green : .orange
+                color: model.isWiredDevicePresent ? .ok : .brand
             )
 
             StatusCard(
@@ -68,7 +68,7 @@ struct ContentView: View {
                 value: model.isDonglePresent ? L10n.format("%d endpoint(s)", model.wirelessEndpoints.count) : L10n.text("Not connected"),
                 detail: model.isDonglePresent ? L10n.text("Required for battery, RGB and performance.") : L10n.text("Plug in the 2.4G receiver."),
                 systemImage: "antenna.radiowaves.left.and.right",
-                color: model.isDonglePresent ? .green : .orange
+                color: model.isDonglePresent ? .ok : .brand
             )
 
             StatusCard(
@@ -117,7 +117,7 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.orange)
+                .tint(.brand)
                 .disabled(model.isWorking || !model.isWiredDevicePresent)
 
                 SectionDivider()
@@ -140,11 +140,11 @@ struct ContentView: View {
                         .font(.callout)
                         .lineLimit(1)
                         .truncationMode(.middle)
-                        .foregroundStyle(model.selectedFile == nil ? .white.opacity(0.45) : .white.opacity(0.78))
+                        .foregroundStyle(model.selectedFile == nil ? .ink.opacity(0.45) : .ink.opacity(0.78))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 7)
-                        .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 10))
+                        .background(.ink.opacity(0.06), in: RoundedRectangle(cornerRadius: 10))
                 }
 
                 HStack(spacing: 16) {
@@ -157,23 +157,24 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .labelsHidden()
                     .frame(width: 230)
                 }
-                .foregroundStyle(.white.opacity(0.88))
+                .foregroundStyle(.ink.opacity(0.88))
 
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
                         Text(L10n.text("Upload progress"))
                             .font(.caption)
-                            .foregroundStyle(.white.opacity(0.52))
+                            .foregroundStyle(.ink.opacity(0.52))
                         Spacer()
                         Text(uploadProgressText)
                             .font(.caption.monospacedDigit())
-                            .foregroundStyle(.white.opacity(0.62))
+                            .foregroundStyle(.ink.opacity(0.62))
                     }
 
                     ProgressView(value: model.progress.fraction)
-                        .tint(.orange)
+                        .tint(.brand)
                 }
 
                 Button {
@@ -183,7 +184,7 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.orange)
+                .tint(.brand)
                 .disabled(model.isWorking || model.selectedFile == nil || !model.isWiredDevicePresent)
 
                 SectionDivider()
@@ -218,10 +219,10 @@ struct ContentView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(L10n.text("Battery"))
                             .font(.headline)
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.ink)
                         Text(model.isDonglePresent ? L10n.text("Read from the receiver endpoint.") : L10n.text("Unavailable until the 2.4G dongle is connected."))
                             .font(.caption)
-                            .foregroundStyle(.white.opacity(0.55))
+                            .foregroundStyle(.ink.opacity(0.55))
                     }
 
                     Spacer()
@@ -274,7 +275,7 @@ struct ContentView: View {
                             .disabled(model.rgbColorful)
                     }
                 }
-                .foregroundStyle(.white.opacity(0.88))
+                .foregroundStyle(.ink.opacity(0.88))
                 .disabled(model.isWorking || !model.isDonglePresent)
 
                 Button {
@@ -284,7 +285,7 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.orange)
+                .tint(.brand)
                 .disabled(model.isWorking || !model.isDonglePresent)
 
                 SectionDivider()
@@ -311,7 +312,7 @@ struct ContentView: View {
                     .pickerStyle(.segmented)
                     .id("sleep-\(model.selectedLanguageCode)")
                 }
-                .foregroundStyle(.white.opacity(0.88))
+                .foregroundStyle(.ink.opacity(0.88))
                 .disabled(model.isWorking || !model.isDonglePresent)
 
                 HStack(spacing: 10) {
@@ -341,7 +342,7 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(model.gameModeEnabled ? .green : .orange)
+                .tint(model.gameModeEnabled ? .ok : .brand)
                 .disabled(model.isWorking || !model.isDonglePresent)
             }
         }
@@ -357,7 +358,7 @@ struct ContentView: View {
                 HStack(alignment: .center, spacing: 12) {
                     Text(L10n.text("Status updates automatically on USB plug and unplug events."))
                         .font(.caption)
-                        .foregroundStyle(.white.opacity(0.55))
+                        .foregroundStyle(.ink.opacity(0.55))
 
                     Spacer()
 
@@ -410,16 +411,16 @@ struct ContentView: View {
                 HStack(alignment: .center, spacing: 12) {
                     Image(systemName: "power")
                         .font(.title3)
-                        .foregroundStyle(.orange)
+                        .foregroundStyle(.brand)
                         .frame(width: 28)
 
                     VStack(alignment: .leading, spacing: 3) {
                         Text(L10n.text("Launch at Login"))
                             .font(.headline)
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.ink)
                         Text(L10n.text("Starts the app after macOS sign-in. This does not require the keyboard or dongle."))
                             .font(.caption)
-                            .foregroundStyle(.white.opacity(0.55))
+                            .foregroundStyle(.ink.opacity(0.55))
                     }
 
                     Spacer()
@@ -439,7 +440,7 @@ struct ContentView: View {
                             .controlSize(.small)
                         Text(L10n.text("A device command is running. Settings are locked until it finishes."))
                             .font(.caption)
-                            .foregroundStyle(.white.opacity(0.58))
+                            .foregroundStyle(.ink.opacity(0.58))
                     }
                 }
             }
@@ -459,7 +460,7 @@ struct ContentView: View {
                             Text(line)
                                 .id(index)
                                 .font(.system(.caption, design: .monospaced))
-                                .foregroundStyle(.white.opacity(0.78))
+                                .foregroundStyle(.ink.opacity(0.78))
                                 .textSelection(.enabled)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
@@ -467,13 +468,13 @@ struct ContentView: View {
                         if model.logLines.isEmpty {
                             Text(L10n.text("No log entries yet."))
                                 .font(.system(.caption, design: .monospaced))
-                                .foregroundStyle(.white.opacity(0.45))
+                                .foregroundStyle(.ink.opacity(0.45))
                         }
                     }
                     .padding(12)
                 }
                 .frame(height: 150)
-                .background(.black.opacity(0.18), in: RoundedRectangle(cornerRadius: 14))
+                .background(.well.opacity(0.18), in: RoundedRectangle(cornerRadius: 14))
                 .onChange(of: model.logLines.count) { _, newValue in
                     proxy.scrollTo(max(newValue - 1, 0), anchor: .bottom)
                 }
@@ -493,24 +494,16 @@ struct ContentView: View {
 private struct AppBackground: View {
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color(red: 0.03, green: 0.05, blue: 0.06),
-                    Color(red: 0.07, green: 0.11, blue: 0.12),
-                    Color(red: 0.14, green: 0.10, blue: 0.04)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            Backdrop.gradient
 
             Circle()
-                .fill(.orange.opacity(0.18))
+                .fill(.brand.opacity(0.18))
                 .frame(width: 420, height: 420)
                 .blur(radius: 80)
                 .offset(x: -430, y: -260)
 
             Circle()
-                .fill(.teal.opacity(0.14))
+                .fill(Color.halo)
                 .frame(width: 520, height: 520)
                 .blur(radius: 100)
                 .offset(x: 460, y: 180)
@@ -556,16 +549,16 @@ private struct StatusCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(.white.opacity(0.55))
+                    .foregroundStyle(.ink.opacity(0.55))
                     .textCase(.uppercase)
 
                 Text(value)
                     .font(.title3.weight(.bold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.ink)
 
                 Text(detail)
                     .font(.caption)
-                    .foregroundStyle(.white.opacity(0.55))
+                    .foregroundStyle(.ink.opacity(0.55))
                     .lineLimit(2)
             }
 
@@ -573,10 +566,10 @@ private struct StatusCard: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, minHeight: 116, alignment: .topLeading)
-        .background(.white.opacity(0.075), in: RoundedRectangle(cornerRadius: 22))
+        .background(.ink.opacity(0.075), in: RoundedRectangle(cornerRadius: 22))
         .overlay(
             RoundedRectangle(cornerRadius: 22)
-                .stroke(.white.opacity(0.12), lineWidth: 1)
+                .stroke(.ink.opacity(0.12), lineWidth: 1)
         )
     }
 }
@@ -592,17 +585,17 @@ private struct Panel<Content: View>: View {
             HStack(alignment: .center, spacing: 12) {
                 Image(systemName: systemImage)
                     .font(.title3)
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(.brand)
                     .frame(width: 32, height: 32)
-                    .background(.orange.opacity(0.13), in: RoundedRectangle(cornerRadius: 10))
+                    .background(.brand.opacity(0.13), in: RoundedRectangle(cornerRadius: 10))
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(title)
                         .font(.custom("Avenir Next", size: 18).weight(.bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.ink)
                     Text(subtitle)
                         .font(.caption)
-                        .foregroundStyle(.white.opacity(0.55))
+                        .foregroundStyle(.ink.opacity(0.55))
                 }
 
                 Spacer()
@@ -613,12 +606,12 @@ private struct Panel<Content: View>: View {
         .padding(18)
         .background(
             RoundedRectangle(cornerRadius: 24)
-                .fill(.white.opacity(0.08))
-                .shadow(color: .black.opacity(0.25), radius: 24, x: 0, y: 12)
+                .fill(.ink.opacity(0.08))
+                .shadow(color: .well.opacity(0.25), radius: 24, x: 0, y: 12)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 24)
-                .stroke(.white.opacity(0.12), lineWidth: 1)
+                .stroke(.ink.opacity(0.12), lineWidth: 1)
         )
     }
 }
@@ -632,16 +625,16 @@ private struct ActionHeader: View {
         HStack(alignment: .top, spacing: 10) {
             Image(systemName: systemImage)
                 .font(.headline)
-                .foregroundStyle(.orange)
+                .foregroundStyle(.brand)
                 .frame(width: 24)
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(title)
                     .font(.headline)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.ink)
                 Text(detail)
                     .font(.caption)
-                    .foregroundStyle(.white.opacity(0.55))
+                    .foregroundStyle(.ink.opacity(0.55))
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
@@ -659,14 +652,14 @@ private struct EndpointGroup: View {
             HStack {
                 Text(title)
                     .font(.headline)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.ink)
                 Spacer()
                 Text(L10n.format("%d", endpoints.count))
                     .font(.caption.monospacedDigit().weight(.semibold))
-                    .foregroundStyle(.white.opacity(0.58))
+                    .foregroundStyle(.ink.opacity(0.58))
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
-                    .background(.white.opacity(0.08), in: Capsule())
+                    .background(.ink.opacity(0.08), in: Capsule())
             }
 
             if endpoints.isEmpty {
@@ -690,25 +683,25 @@ private struct EmptyEndpointState: View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: "exclamationmark.circle")
                 .font(.title3)
-                .foregroundStyle(.orange)
+                .foregroundStyle(.brand)
                 .frame(width: 28)
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.callout.weight(.semibold))
-                    .foregroundStyle(.white.opacity(0.82))
+                    .foregroundStyle(.ink.opacity(0.82))
                 Text(detail)
                     .font(.caption)
-                    .foregroundStyle(.white.opacity(0.55))
+                    .foregroundStyle(.ink.opacity(0.55))
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.orange.opacity(0.08), in: RoundedRectangle(cornerRadius: 14))
+        .background(.brand.opacity(0.08), in: RoundedRectangle(cornerRadius: 14))
         .overlay(
             RoundedRectangle(cornerRadius: 14)
-                .stroke(.orange.opacity(0.18), lineWidth: 1)
+                .stroke(.brand.opacity(0.18), lineWidth: 1)
         )
     }
 }
@@ -725,14 +718,14 @@ private struct EndpointRow: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(endpoint.role)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.ink)
                     .font(.headline)
                 Text(endpoint.summary)
-                    .foregroundStyle(.white.opacity(0.62))
+                    .foregroundStyle(.ink.opacity(0.62))
                     .font(.caption)
                     .lineLimit(2)
                 Text(L10n.format("%@ via %@", endpoint.product, endpoint.transport))
-                    .foregroundStyle(.white.opacity(0.48))
+                    .foregroundStyle(.ink.opacity(0.48))
                     .font(.caption2)
                     .lineLimit(1)
             }
@@ -740,7 +733,7 @@ private struct EndpointRow: View {
             Spacer()
         }
         .padding(12)
-        .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 14))
+        .background(.ink.opacity(0.06), in: RoundedRectangle(cornerRadius: 14))
     }
 
     private var iconName: String {
@@ -754,7 +747,7 @@ private struct EndpointRow: View {
     }
 
     private var iconColor: Color {
-        endpoint.role.contains("display") || endpoint.role.contains("raw") ? .orange : .teal
+        endpoint.role.contains("display") || endpoint.role.contains("raw") ? .brand : .teal
     }
 }
 
@@ -774,36 +767,36 @@ private struct LanguageSelector: View {
                 HStack(alignment: .center, spacing: 12) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(.orange.opacity(0.13))
+                            .fill(.brand.opacity(0.13))
                         Text(selectedFlag)
                             .font(.title3)
                     }
                     .frame(width: 34, height: 34)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(.orange.opacity(0.24), lineWidth: 1)
+                            .stroke(.brand.opacity(0.24), lineWidth: 1)
                     )
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text(L10n.text("Language"))
                             .font(.headline)
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.ink)
 
                         Text(selectedName)
                             .font(.subheadline.weight(.semibold))
                             .lineLimit(1)
                             .truncationMode(.tail)
-                            .foregroundStyle(.white.opacity(0.92))
+                            .foregroundStyle(.ink.opacity(0.92))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .layoutPriority(1)
 
                     ZStack {
                         Circle()
-                            .fill(.orange.opacity(isLanguagePickerPresented ? 0.22 : 0.12))
+                            .fill(.brand.opacity(isLanguagePickerPresented ? 0.22 : 0.12))
                         Image(systemName: "chevron.down")
                             .font(.caption.weight(.heavy))
-                            .foregroundStyle(.orange.opacity(0.9))
+                            .foregroundStyle(.brand.opacity(0.9))
                             .rotationEffect(.degrees(isLanguagePickerPresented ? 180 : 0))
                     }
                     .frame(width: 32, height: 32)
@@ -811,10 +804,10 @@ private struct LanguageSelector: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, 10)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
+                .background(.ink.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(.white.opacity(0.12), lineWidth: 1)
+                        .stroke(.ink.opacity(0.12), lineWidth: 1)
                 )
             }
             .buttonStyle(.plain)
@@ -839,13 +832,13 @@ private struct LanguageSelector: View {
                     HStack(spacing: 10) {
                         Image(systemName: selectedCode == language.code ? "checkmark.circle.fill" : "circle")
                             .font(.caption.weight(.bold))
-                            .foregroundStyle(selectedCode == language.code ? .orange : .white.opacity(0.22))
+                            .foregroundStyle(selectedCode == language.code ? .brand : .ink.opacity(0.22))
                             .frame(width: 16)
                         Text(language.flag)
                             .font(.body)
                         Text(language.code == "system" ? L10n.text(language.name) : language.name)
                             .font(.callout.weight(.semibold))
-                            .foregroundStyle(.white.opacity(0.92))
+                            .foregroundStyle(.ink.opacity(0.92))
                             .lineLimit(1)
                         Spacer(minLength: 0)
                     }
@@ -854,7 +847,7 @@ private struct LanguageSelector: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
                     .background(
-                        selectedCode == language.code ? .orange.opacity(0.12) : .white.opacity(0.04),
+                        selectedCode == language.code ? .brand.opacity(0.12) : .ink.opacity(0.04),
                         in: RoundedRectangle(cornerRadius: 8)
                     )
                 }
@@ -863,18 +856,18 @@ private struct LanguageSelector: View {
         }
         .padding(8)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.white.opacity(0.08), in: RoundedRectangle(cornerRadius: 12))
+        .background(.ink.opacity(0.08), in: RoundedRectangle(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(.white.opacity(0.12), lineWidth: 1)
+                .stroke(.ink.opacity(0.12), lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.35), radius: 18, y: 10)
+        .shadow(color: .well.opacity(0.35), radius: 18, y: 10)
     }
 }
 
 private struct SectionDivider: View {
     var body: some View {
         Divider()
-            .overlay(.white.opacity(0.18))
+            .overlay(.ink.opacity(0.18))
     }
 }
