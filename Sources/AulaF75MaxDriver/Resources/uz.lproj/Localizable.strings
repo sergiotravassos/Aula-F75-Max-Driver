@@ -23,6 +23,7 @@
 "Screen upload" = "Ekran rasmi";
 "Prepare a PNG, JPEG, GIF, BMP, TIFF or WebP for the 128 x 128 keyboard display." = "Klaviaturaning 128 x 128 ekrani uchun PNG, JPEG, GIF, BMP, TIFF yoki WebP tanlang.";
 "Choose File" = "Fayl tanlash";
+"No file selected" = "Fayl tanlanmagan";
 "Upload progress" = "Yuklash jarayoni";
 "Upload to Keyboard Screen" = "Klaviatura ekraniga yuklash";
 "Factory reset" = "Zavod sozlamalariga qaytarish";
@@ -82,6 +83,11 @@
 "Cancel" = "Bekor qilish";
 "Factory reset cancelled." = "Zavod sozlamalariga qaytarish bekor qilindi.";
 "Starting factory reset..." = "Zavod sozlamalariga qaytarish boshlanmoqda...";
+"Clearing display memory" = "Ekran xotirasi tozalanmoqda";
+"Resetting keymap and macro data" = "Tugmalar xaritasi va makroslar tiklanmoqda";
+"Resetting lighting data" = "Yoritish ma'lumotlari tiklanmoqda";
+"Sending reset footer" = "Tiklashning yakuniy bloki yuborilmoqda";
+"Resetting display config" = "Ekran sozlamalari tiklanmoqda";
 "Factory reset complete." = "Zavod sozlamalariga qaytarish tugadi.";
 "Applying RGB lighting..." = "RGB yoritish qo'llanmoqda...";
 "RGB set: %@ B%d S%d %@ %@." = "RGB: %@ B%d S%d %@ %@.";
@@ -104,6 +110,7 @@
 "wired %d endpoint(s)" = "USB HID kanallari: %d";
 "2.4G disconnected" = "2.4G ulanmagan";
 "2.4G %d endpoint(s)" = "2.4G HID kanallari: %d";
+"%d endpoint(s)" = "%d ta HID kanali";
 "Connect the 2.4G dongle before querying battery." = "Batareyani so'rashdan oldin 2.4G qabul qilgichni ulang.";
 "Querying keyboard battery..." = "Klaviatura batareyasi so'ralmoqda...";
 "Battery: %d%%." = "Batareya: %d%%.";
@@ -178,3 +185,9 @@
 "Direction %d" = "%d-yo'nalish";
 "Level %d" = "%d-daraja";
 "Value %d" = "%d-qiymat";
+
+"Appearance" = "Ko‘rinish";
+"Follow macOS or pin the window to one appearance." = "macOS’ga ergashing yoki oynani bitta ko‘rinishga biriktiring.";
+"Match system" = "Tizimga mos";
+"Light" = "Yorug‘";
+"Dark" = "Qorong‘i";

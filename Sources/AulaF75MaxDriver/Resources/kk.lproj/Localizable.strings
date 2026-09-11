@@ -23,6 +23,7 @@
 "Screen upload" = "Экран суреті";
 "Prepare a PNG, JPEG, GIF, BMP, TIFF or WebP for the 128 x 128 keyboard display." = "Пернетақтаның 128 x 128 экраны үшін PNG, JPEG, GIF, BMP, TIFF немесе WebP таңдаңыз.";
 "Choose File" = "Файл таңдау";
+"No file selected" = "Файл таңдалмаған";
 "Upload progress" = "Жүктеу барысы";
 "Upload to Keyboard Screen" = "Пернетақта экранына жүктеу";
 "Factory reset" = "Зауыттық баптауларға қайтару";
@@ -82,6 +83,11 @@
 "Cancel" = "Болдырмау";
 "Factory reset cancelled." = "Зауыттық қайтару болдырылмады.";
 "Starting factory reset..." = "Зауыттық қайтару басталуда...";
+"Clearing display memory" = "Экран жады тазартылуда";
+"Resetting keymap and macro data" = "Пернелер картасы мен макростар қалпына келтірілуде";
+"Resetting lighting data" = "Жарықтандыру деректері қалпына келтірілуде";
+"Sending reset footer" = "Қалпына келтірудің соңғы блогы жіберілуде";
+"Resetting display config" = "Экран параметрлері қалпына келтірілуде";
 "Factory reset complete." = "Зауыттық қайтару аяқталды.";
 "Applying RGB lighting..." = "RGB жарығы қолданылуда...";
 "RGB set: %@ B%d S%d %@ %@." = "RGB: %@ B%d S%d %@ %@.";
@@ -104,6 +110,7 @@
 "wired %d endpoint(s)" = "USB HID арналары: %d";
 "2.4G disconnected" = "2.4G қосылмаған";
 "2.4G %d endpoint(s)" = "2.4G HID арналары: %d";
+"%d endpoint(s)" = "%d HID арнасы";
 "Connect the 2.4G dongle before querying battery." = "Батареяны сұрамас бұрын 2.4G қабылдағышты қосыңыз.";
 "Querying keyboard battery..." = "Пернетақта батареясы сұралуда...";
 "Battery: %d%%." = "Батарея: %d%%.";
@@ -178,3 +185,9 @@
 "Direction %d" = "%d-бағыт";
 "Level %d" = "%d-деңгей";
 "Value %d" = "%d-мән";
+
+"Appearance" = "Безендіру";
+"Follow macOS or pin the window to one appearance." = "macOS-пен үйлесу немесе терезені бір көрініске бекіту.";
+"Match system" = "Жүйемен үйлесу";
+"Light" = "Ашық";
+"Dark" = "Қою";

@@ -23,6 +23,7 @@
 "Screen upload" = "Изображение для экрана";
 "Prepare a PNG, JPEG, GIF, BMP, TIFF or WebP for the 128 x 128 keyboard display." = "Выберите PNG, JPEG, GIF, BMP, TIFF или WebP для экрана клавиатуры 128 x 128.";
 "Choose File" = "Выбрать файл";
+"No file selected" = "Файл не выбран";
 "Upload progress" = "Прогресс загрузки";
 "Upload to Keyboard Screen" = "Загрузить на экран клавиатуры";
 "Factory reset" = "Сброс настроек";
@@ -82,6 +83,11 @@
 "Cancel" = "Отмена";
 "Factory reset cancelled." = "Сброс отменён.";
 "Starting factory reset..." = "Запуск сброса...";
+"Clearing display memory" = "Очистка памяти экрана";
+"Resetting keymap and macro data" = "Сброс раскладки и макросов";
+"Resetting lighting data" = "Сброс данных подсветки";
+"Sending reset footer" = "Отправка завершающего блока сброса";
+"Resetting display config" = "Сброс настроек экрана";
 "Factory reset complete." = "Сброс завершён.";
 "Applying RGB lighting..." = "Применение RGB-подсветки...";
 "RGB set: %@ B%d S%d %@ %@." = "RGB применён: %@, яркость %d, скорость %d, %@, %@.";
@@ -104,6 +110,7 @@
 "wired %d endpoint(s)" = "USB HID-каналов: %d";
 "2.4G disconnected" = "2.4G не подключён";
 "2.4G %d endpoint(s)" = "2.4G HID-каналов: %d";
+"%d endpoint(s)" = "HID-каналов: %d";
 "Connect the 2.4G dongle before querying battery." = "Подключите 2.4G-приёмник перед запросом батареи.";
 "Querying keyboard battery..." = "Запрос батареи клавиатуры...";
 "Battery: %d%%." = "Батарея: %d%%.";
@@ -178,3 +185,9 @@
 "Direction %d" = "Направление %d";
 "Level %d" = "Уровень %d";
 "Value %d" = "Значение %d";
+
+"Appearance" = "Оформление";
+"Follow macOS or pin the window to one appearance." = "Следовать за macOS или закрепить одно оформление.";
+"Match system" = "Как в системе";
+"Light" = "Светлое";
+"Dark" = "Тёмное";

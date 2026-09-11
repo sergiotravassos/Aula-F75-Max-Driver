@@ -155,7 +155,7 @@ final class AulaDevice {
     }
 
     func factoryReset(progress: @escaping @Sendable (String) -> Void) throws {
-        progress("Clearing display memory")
+        progress(L10n.text("Clearing display memory"))
         try commandExchange(Self.packet(0x04, 0x19))
         var clearSlots = Self.packet(0x04, 0x15)
         clearSlots[8] = 0x08
@@ -163,7 +163,7 @@ final class AulaDevice {
         try sendZeroPages(8)
         try commandExchange(Self.packet(0x04, 0x02))
 
-        progress("Resetting keymap and macro data")
+        progress(L10n.text("Resetting keymap and macro data"))
         try commandExchange(Self.packet(0x04, 0x18))
         var keymap = Self.packet(0x04, 0x11)
         keymap[8] = 0x09
@@ -172,7 +172,7 @@ final class AulaDevice {
         try commandExchange(Self.packet(0x04, 0x02))
         try commandExchange(Self.packet(0x04, 0xf0))
 
-        progress("Resetting lighting data")
+        progress(L10n.text("Resetting lighting data"))
         try commandExchange(Self.packet(0x04, 0x18))
         var lighting = Self.packet(0x04, 0x27)
         lighting[8] = 0x09
@@ -181,7 +181,7 @@ final class AulaDevice {
         try commandExchange(Self.packet(0x04, 0x02))
         try commandExchange(Self.packet(0x04, 0xf0))
 
-        progress("Sending reset footer")
+        progress(L10n.text("Sending reset footer"))
         try commandExchange(Self.packet(0x04, 0x18))
         var resetPayloadHeader = Self.packet(0x04, 0x13)
         resetPayloadHeader[8] = 0x01
@@ -199,7 +199,7 @@ final class AulaDevice {
         try commandExchange(Self.packet(0x04, 0x02))
         try commandExchange(Self.packet(0x04, 0xf0))
 
-        progress("Resetting display config")
+        progress(L10n.text("Resetting display config"))
         try commandExchange(Self.packet(0x04, 0x18))
         var displayReset = Self.packet(0x04, 0x17)
         displayReset[2] = 0x01

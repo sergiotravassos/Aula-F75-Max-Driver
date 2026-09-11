@@ -23,6 +23,7 @@
 "Screen upload" = "屏幕图像";
 "Prepare a PNG, JPEG, GIF, BMP, TIFF or WebP for the 128 x 128 keyboard display." = "选择 PNG、JPEG、GIF、BMP、TIFF 或 WebP，用于 128 x 128 键盘屏幕。";
 "Choose File" = "选择文件";
+"No file selected" = "未选择文件";
 "Upload progress" = "上传进度";
 "Upload to Keyboard Screen" = "上传到键盘屏幕";
 "Factory reset" = "恢复出厂设置";
@@ -82,6 +83,11 @@
 "Cancel" = "取消";
 "Factory reset cancelled." = "已取消恢复出厂设置。";
 "Starting factory reset..." = "正在开始恢复出厂设置...";
+"Clearing display memory" = "正在清除屏幕内存";
+"Resetting keymap and macro data" = "正在重置键位映射和宏数据";
+"Resetting lighting data" = "正在重置灯光数据";
+"Sending reset footer" = "正在发送重置结束块";
+"Resetting display config" = "正在重置屏幕配置";
 "Factory reset complete." = "恢复出厂设置完成。";
 "Applying RGB lighting..." = "正在应用 RGB 灯效...";
 "RGB set: %@ B%d S%d %@ %@." = "RGB 已应用：%@，亮度 %d，速度 %d，%@，%@。";
@@ -104,6 +110,7 @@
 "wired %d endpoint(s)" = "USB HID 通道：%d";
 "2.4G disconnected" = "2.4G 未连接";
 "2.4G %d endpoint(s)" = "2.4G HID 通道：%d";
+"%d endpoint(s)" = "%d 个 HID 通道";
 "Connect the 2.4G dongle before querying battery." = "查询电量前请先连接 2.4G 接收器。";
 "Querying keyboard battery..." = "正在查询键盘电量...";
 "Battery: %d%%." = "电量：%d%%。";
@@ -178,3 +185,9 @@
 "Direction %d" = "方向 %d";
 "Level %d" = "等级 %d";
 "Value %d" = "值 %d";
+
+"Appearance" = "外观";
+"Follow macOS or pin the window to one appearance." = "跟随 macOS，或将窗口固定为一种外观。";
+"Match system" = "跟随系统";
+"Light" = "浅色";
+"Dark" = "深色";

@@ -23,6 +23,7 @@
 "Screen upload" = "Imagen para la pantalla";
 "Prepare a PNG, JPEG, GIF, BMP, TIFF or WebP for the 128 x 128 keyboard display." = "Elige un PNG, JPEG, GIF, BMP, TIFF o WebP para la pantalla de 128 x 128 del teclado.";
 "Choose File" = "Elegir archivo";
+"No file selected" = "Ningún archivo seleccionado";
 "Upload progress" = "Progreso de carga";
 "Upload to Keyboard Screen" = "Subir a la pantalla del teclado";
 "Factory reset" = "Restablecimiento de fábrica";
@@ -82,6 +83,11 @@
 "Cancel" = "Cancelar";
 "Factory reset cancelled." = "Restablecimiento cancelado.";
 "Starting factory reset..." = "Iniciando restablecimiento...";
+"Clearing display memory" = "Borrando la memoria de la pantalla";
+"Resetting keymap and macro data" = "Restableciendo el mapa de teclas y las macros";
+"Resetting lighting data" = "Restableciendo los datos de iluminación";
+"Sending reset footer" = "Enviando el bloque final del restablecimiento";
+"Resetting display config" = "Restableciendo la configuración de la pantalla";
 "Factory reset complete." = "Restablecimiento completo.";
 "Applying RGB lighting..." = "Aplicando iluminación RGB...";
 "RGB set: %@ B%d S%d %@ %@." = "RGB aplicado: %@, brillo %d, velocidad %d, %@, %@.";
@@ -104,6 +110,7 @@
 "wired %d endpoint(s)" = "Canales HID USB: %d";
 "2.4G disconnected" = "2.4G desconectado";
 "2.4G %d endpoint(s)" = "Canales HID 2.4G: %d";
+"%d endpoint(s)" = "%d canales HID";
 "Connect the 2.4G dongle before querying battery." = "Conecta el receptor 2.4G antes de consultar la batería.";
 "Querying keyboard battery..." = "Consultando batería del teclado...";
 "Battery: %d%%." = "Batería: %d%%.";
@@ -178,3 +185,9 @@
 "Direction %d" = "Dirección %d";
 "Level %d" = "Nivel %d";
 "Value %d" = "Valor %d";
+
+"Appearance" = "Apariencia";
+"Follow macOS or pin the window to one appearance." = "Sigue a macOS o fija la ventana en una apariencia.";
+"Match system" = "Seguir al sistema";
+"Light" = "Claro";
+"Dark" = "Oscuro";
