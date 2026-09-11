@@ -362,6 +362,18 @@ final class WirelessAulaDevice {
         guard result == kIOReturnSuccess else {
             throw AulaError.hidFailed(operation, Int32(result))
         }
+
+        // Complete the exchange the way AulaDevice.commandExchange does. The
+        // wired command channel is request/response: every SET_REPORT that the
+        // clock sync and the display upload send is followed by a GET_REPORT
+        // that drains the reply. Writing without reading leaves the reply
+        // queued and the keyboard's state machine part-way through the
+        // transaction, so the writes that follow land nowhere.
+        var response = [UInt8](repeating: 0, count: 64)
+        var responseLength = response.count
+        _ = response.withUnsafeMutableBufferPointer { pointer in
+            IOHIDDeviceGetReport(rawDevice, kIOHIDReportTypeFeature, 0, pointer.baseAddress!, &responseLength)
+        }
     }
 
     private func sendBatteryQuery(includeReportID: Bool, length: Int) throws {
