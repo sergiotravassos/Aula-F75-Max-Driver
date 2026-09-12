@@ -147,6 +147,33 @@ final class AppViewModel: ObservableObject {
         UserDefaults.standard.set(theme.rawValue, forKey: Self.themeDefaultsKey)
     }
 
+    /// Put anything the keyboard refused into the activity log.
+    ///
+    /// The keyboard echoes back every command it accepts, so a packet that comes
+    /// back wrong was dropped. Saying "done" over a write that did nothing is how
+    /// a broken feature stays hidden.
+    private func reportUnacknowledged(_ device: WirelessAulaDevice) async {
+        let rejected = device.unacknowledged
+        guard !rejected.isEmpty else { return }
+        await MainActor.run {
+            self.appendLog(L10n.format("Keyboard did not acknowledge %d packet(s).", rejected.count))
+            for line in rejected.prefix(5) {
+                self.appendLog(line)
+            }
+        }
+    }
+
+    private func reportUnacknowledged(_ device: AulaDevice) async {
+        let rejected = device.unacknowledged
+        guard !rejected.isEmpty else { return }
+        await MainActor.run {
+            self.appendLog(L10n.format("Keyboard did not acknowledge %d packet(s).", rejected.count))
+            for line in rejected.prefix(5) {
+                self.appendLog(line)
+            }
+        }
+    }
+
     func setLanguage(_ languageCode: String) {
         guard selectedLanguageCode != languageCode else { return }
         selectedLanguageCode = L10n.configure(languageCode: languageCode)
@@ -184,6 +211,7 @@ final class AppViewModel: ObservableObject {
         runTask(startMessage: L10n.text("Syncing keyboard clock...")) {
             let device = try AulaDevice.connect()
             try device.syncTime()
+            await self.reportUnacknowledged(device)
             return L10n.text("Keyboard clock synced.")
         }
     }
@@ -211,6 +239,7 @@ final class AppViewModel: ObservableObject {
                     self.progress = progress
                 }
             }
+            await self.reportUnacknowledged(device)
             return L10n.format("Uploaded %d frame(s) to slot %d.", encoded.frameCount, targetSlot)
         }
     }
@@ -234,6 +263,7 @@ final class AppViewModel: ObservableObject {
                     self.appendLog(message)
                 }
             }
+            await self.reportUnacknowledged(device)
             return L10n.text("Factory reset complete.")
         }
     }
@@ -260,6 +290,7 @@ final class AppViewModel: ObservableObject {
                 colorful: colorful,
                 color: color
             )
+            await self.reportUnacknowledged(device)
             let colorText = colorful ? L10n.text("Colourful") : String(format: "#%06X", color)
             return L10n.format(
                 "RGB set: %@ B%d S%d %@ %@.",

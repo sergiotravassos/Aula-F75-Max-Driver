@@ -191,3 +191,4 @@
 "Match system" = "Как в системе";
 "Light" = "Светлое";
 "Dark" = "Тёмное";
+"Keyboard did not acknowledge %d packet(s)." = "Клавиатура не подтвердила %d пакет(ов).";
