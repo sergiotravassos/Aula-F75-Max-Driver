@@ -771,3 +771,41 @@ code {
     align-items: flex-start;
   }
 }
+
+/* Par de capturas mostrando as duas aparências da app. A página é escura por
+   opção, por isso a captura clara aparece emoldurada em vez de sangrar. */
+.appearance-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.appearance-pair figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.appearance-pair img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.appearance-pair figcaption {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+@media (max-width: 720px) {
+  .appearance-pair {
+    grid-template-columns: 1fr;
+  }
+}
