@@ -191,3 +191,4 @@
 "Match system" = "Acompanhar o sistema";
 "Light" = "Claro";
 "Dark" = "Escuro";
+"Keyboard did not acknowledge %d packet(s)." = "O teclado não confirmou %d pacote(s).";

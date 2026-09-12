@@ -91,6 +91,9 @@ final class WirelessAulaDevice {
     private let transport: Transport
     private var batteryPipe: BatteryInputPipe?
 
+    /// Packets the keyboard echoed back wrong, meaning it did not take them.
+    private(set) var unacknowledged: [String] = []
+
     private init(rawDevice: IOHIDDevice, transport: Transport) throws {
         self.rawDevice = rawDevice
         self.outputReportSize = Self.intProperty(rawDevice, kIOHIDMaxOutputReportSizeKey)
@@ -371,8 +374,19 @@ final class WirelessAulaDevice {
         // transaction, so the writes that follow land nowhere.
         var response = [UInt8](repeating: 0, count: 64)
         var responseLength = response.count
-        _ = response.withUnsafeMutableBufferPointer { pointer in
+        let read = response.withUnsafeMutableBufferPointer { pointer in
             IOHIDDeviceGetReport(rawDevice, kIOHIDReportTypeFeature, 0, pointer.baseAddress!, &responseLength)
+        }
+
+        // That reply is an echo of what was sent, so it also says whether the
+        // keyboard took it. This is the path where a rejected write used to
+        // report success and change nothing at all.
+        if read == kIOReturnSuccess, responseLength >= 2, payload.count >= 2,
+           response[0] != payload[0] || response[1] != payload[1] {
+            unacknowledged.append(String(
+                format: "%@: sent %02x %02x, keyboard answered %02x %02x",
+                operation, payload[0], payload[1], response[0], response[1]
+            ))
         }
     }
 

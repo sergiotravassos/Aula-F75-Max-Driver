@@ -215,7 +215,30 @@ final class AulaDevice {
         try commandExchange(Self.packet(0x04, 0x02))
     }
 
-    private func commandExchange(_ packet: [UInt8]) throws {
+    /// Packets the keyboard did not acknowledge during the current operation.
+    ///
+    /// Empty means every command was taken. Anything here was rejected silently,
+    /// which is worth surfacing: a write that does nothing otherwise looks
+    /// exactly like a write that worked.
+    private(set) var unacknowledged: [String] = []
+
+    /// The keyboard answers every feature write by echoing the packet back.
+    ///
+    /// Measured against the clock-sync sequence, which is known to work:
+    ///
+    ///     sent  04 18 00 00 ...   ->  reply  04 18 00 01 ...
+    ///     sent  04 28 00 00 ...   ->  reply  04 28 00 01 ...
+    ///     sent  <time payload>    ->  reply  <same payload, verbatim>
+    ///
+    /// Command packets come back with byte 3 raised to 0x01; payload pages come
+    /// back unchanged. Either way the first two bytes are echoed, so a reply
+    /// that does not echo them means the keyboard did not take the packet.
+    ///
+    /// A bare GET_REPORT with nothing sent since the device was opened returns
+    /// the previous reply still sitting in the buffer, so the echo is only
+    /// meaningful straight after a write -- which is the only place it is read.
+    @discardableResult
+    private func commandExchange(_ packet: [UInt8]) throws -> [UInt8] {
         try Self.setReport(
             device: commandDevice,
             type: kIOHIDReportTypeFeature,
@@ -238,6 +261,20 @@ final class AulaDevice {
         guard result == kIOReturnSuccess else {
             throw AulaError.hidFailed("GET_REPORT", Int32(result))
         }
+
+        // Reported, never thrown. The echo rule is measured rather than
+        // documented, so a mismatch is evidence that something went wrong, not
+        // proof -- and failing a packet the keyboard may well have taken would
+        // be worse than saying so.
+        if responseLength >= 2, packet.count >= 2,
+           response[0] != packet[0] || response[1] != packet[1] {
+            unacknowledged.append(String(
+                format: "sent %02x %02x, keyboard answered %02x %02x",
+                packet[0], packet[1], response[0], response[1]
+            ))
+        }
+
+        return response
     }
 
     private func sendZeroPages(_ count: Int) throws {

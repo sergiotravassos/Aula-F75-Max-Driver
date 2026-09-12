@@ -191,3 +191,4 @@
 "Match system" = "Match system";
 "Light" = "Light";
 "Dark" = "Dark";
+"Keyboard did not acknowledge %d packet(s)." = "Keyboard did not acknowledge %d packet(s).";
